@@ -52,7 +52,7 @@ void loop() {
       hsv = rgbToHsv(rgb);
 
       if(hsv.h == 0.0  && hsv.v == 0.0  &&  hsv.s == 0.0) resetFunc();
-      playSong( defineColor(hsv) );
+      playSong(defineColor(hsv));
         
       Serial.println(" "); Serial.println("----"); 
       Serial.print("\tH:\t"); Serial.print(hsv.h);
@@ -60,7 +60,6 @@ void loop() {
       Serial.print("\tV:\t"); Serial.print(hsv.v);
       Serial.println(" "); Serial.println("----");
       Serial.println(" "); 
-      delay(300);
     } 
 }
 
