@@ -40,8 +40,7 @@ void setup() {
     while (1); // halt!
   }
 
-  //Reset arduino every 4 seconds WDTO_4S
-	//https://www.nongnu.org/avr-libc/user-manual/group__avr__watchdog.html#ga9e52c54d10b6a6a7ce04aaaa4abea51f  
+  //Reset every 4 seconds WDTO_4S
 	wdt_enable(WDTO_4S);
 }
 
