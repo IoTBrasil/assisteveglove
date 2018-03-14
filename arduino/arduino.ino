@@ -1,5 +1,6 @@
 #include <SPI.h>
 #include <SdFat.h>
+#include <avr/wdt.h>
 #include <SdFatUtil.h>
 #include <SFEMP3Shield.h>
 #include <SoftwareSerial.h>
@@ -38,11 +39,15 @@ void setup() {
     Serial.println("No TCS34725 found ... check your connections");
     while (1); // halt!
   }
+
+  //Reset arduino every 4 seconds WDTO_4S
+	//https://www.nongnu.org/avr-libc/user-manual/group__avr__watchdog.html#ga9e52c54d10b6a6a7ce04aaaa4abea51f  
+	wdt_enable(WDTO_4S);
 }
 
 
 void loop() {
-    while(true){
+      // wdt_reset(); If you want to reset the timer to zero, just call this function
       uint16_t clear, red, green, blue;
          
       tcs.setInterrupt(false); delay(60);
@@ -53,14 +58,6 @@ void loop() {
 
       if(hsv.h == 0.0  && hsv.v == 0.0  &&  hsv.s == 0.0) resetFunc();
       playSong(defineColor(hsv));
-        
-      Serial.println(" "); Serial.println("----"); 
-      Serial.print("\tH:\t"); Serial.print(hsv.h);
-      Serial.print("\tS:\t"); Serial.print(hsv.s);
-      Serial.print("\tV:\t"); Serial.print(hsv.v);
-      Serial.println(" "); Serial.println("----");
-      Serial.println(" "); 
-    } 
 }
 
 
